@@ -6,9 +6,27 @@ import { Line } from 'react-chartjs-2';
 import SelectButton from './SelectButton';
 import { chartDays } from '../config/data';
 import { CircularProgress, ThemeProvider, createTheme, makeStyles } from '@material-ui/core';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
 
-
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Coininfo = ({coin}) => {
   const [historicData , setHistoricData] = useState();
@@ -73,7 +91,7 @@ const Coininfo = ({coin}) => {
               thickness={1}
             />
           ):(<>
-              <Line 
+              { <Line 
                 data={{
                   labels: historicData.map((coin) => {
                     let date = new Date(coin[0]);
@@ -99,7 +117,7 @@ const Coininfo = ({coin}) => {
                 },
               }}
               
-              />
+              /> }
               <div
                 style={{
                   display: "flex",
